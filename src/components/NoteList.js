@@ -1,3 +1,4 @@
+import notes from '../data/api/notes.js'
 class NoteList extends HTMLElement {
     constructor() {
         super();
@@ -7,6 +8,19 @@ class NoteList extends HTMLElement {
     set notes(notes) {
         this._notes = notes;
         this.render();
+    }
+    
+    async connectedCallback() {
+        await this.loadNotes();
+    }
+
+    async loadNotes() {
+        try {
+            const notesData = await notes.getNotes();
+            this.notes = notesData; // Set catatan yang diambil dari API
+        } catch (error) {
+            console.error('Error loading notes:', error);
+        }
     }
     
     render() {
