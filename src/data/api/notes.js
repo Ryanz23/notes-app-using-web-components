@@ -1,37 +1,38 @@
-import { fetchApi } from "../../utils/fetch";
+import { fetchApi } from "../../utils/fetch.js";
 
-class notes {
-    constructor() {
-        this.notes = [];
-    }
+class Notes {
+  constructor() {
+    this.notes = [];
+  }
 
-    static async getNotes() {
-        try {
-            const notes = await fetchApi('notes');
-            this.notesData = notes;
-            return notes;
-        } catch (error) {
-            console.error('Error fetching notes:', error);
-        }
+  async getNotes() {
+    try {
+      const notes = await fetchApi("notes");
+      this.notes = notes;
+      return notes;
+    } catch (error) {
+      console.error("Error fetching notes:", error);
+      return [];
     }
+  }
 
-    static async addNote({ title, body }) {
-        try {
-            const newNote = await fetchApi('notes', 'POST', { title, body });
-            return newNote;
-        } catch (error) {
-            console.error('Error adding note:', error);
-        }
+  async addNote({ title, body }) {
+    try {
+      const newNote = await fetchApi("notes", "POST", { title, body });
+      return newNote;
+    } catch (error) {
+      console.error("Error adding note:", error);
     }
+  }
 
-    static async deleteNote(id) {
-        try {
-            await fetchApi(`notes/${id}`, 'DELETE');
-            return id;
-        } catch (error) {
-            console.error('Error deleting note:', error);
-        }
+  async deleteNote(id) {
+    try {
+      await fetchApi(`notes/${id}`, "DELETE");
+      return id;
+    } catch (error) {
+      console.error("Error deleting note:", error);
     }
+  }
 }
 
-export default new notes();
+export default new Notes();

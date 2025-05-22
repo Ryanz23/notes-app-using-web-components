@@ -1,11 +1,11 @@
 class NoteInput extends HTMLElement {
-    connectedCallback() {
-        this.render();
-        this._setupValidation();
-    }
-    
-    render() {
-        this.innerHTML = `
+  connectedCallback() {
+    this.render();
+    this._setupValidation();
+  }
+
+  render() {
+    this.innerHTML = `
              <div class="px-6 bg-sky-900 max-w-2xl h-full mx-auto py-8 my-auto rounded-lg">
                 <h2 class="text-white text-2xl font-bold md:text-[20px] sm:text-[18px]">Add Notes</h2>
                 <form id="noteForm" class="flex flex-col justify-center text-white  space-y-2">
@@ -23,74 +23,79 @@ class NoteInput extends HTMLElement {
                 </form>
             </div>
         `;
-        
-        this.querySelector('#noteForm').addEventListener('submit', this._onSubmit.bind(this));
-    }
 
-    _setupValidation() {
-        const titleInput = this.querySelector('#title');
-        const bodyInput = this.querySelector('#body');
-        const titleError = this.querySelector('#titleError');
-        const bodyError = this.querySelector('#bodyError');
-        const saveButton = this.querySelector('#saveButton');
-        
-        // Helper function to validate the entire form
-        const validateForm = () => {
-            const isTitleValid = titleInput.value.trim().length >= 3;
-            const isBodyValid = bodyInput.value.trim().length >= 10;
-            
-            saveButton.disabled = !(isTitleValid && isBodyValid);
-        };
-        
-        // Validate title on input
-        titleInput.addEventListener('input', () => {
-            const value = titleInput.value.trim();
-            titleError.textContent = ''; // Reset pesan kesalahan
-            
-            if (value.length < 3) {
-                titleError.textContent = 'Title must be at least 3 characters';
-                titleInput.classList.add('invalid');
-            } else {
-                titleInput.classList.remove('invalid');
-            }
-            
-            validateForm();
-        });
-        
-        // Validate body on input
-        bodyInput.addEventListener('input', () => {
-            const value = bodyInput.value.trim();
-            bodyError.textContent = ''; // Reset pesan kesalahan
-            
-            if (value.length < 10) {
-                bodyError.textContent = 'Notes must be at least 10 characters';
-                bodyInput.classList.add('invalid');
-            } else {
-                bodyInput.classList.remove('invalid');
-            }
-            
-            validateForm();
-        });
-    }
-    
-    _onSubmit(event) {
-        event.preventDefault();
-        const titleInput = this.querySelector('#title');
-        const bodyInput = this.querySelector('#body');
-        
-        const noteData = {
-            title: titleInput.value,
-            body: bodyInput.value
-        };
-        
-        this.dispatchEvent(new CustomEvent('note-submit', {
-            detail: noteData,
-            bubbles: true
-        }));
-        
-        titleInput.value = '';
-        bodyInput.value = '';
-    }
+    this.querySelector("#noteForm").addEventListener(
+      "submit",
+      this._onSubmit.bind(this),
+    );
+  }
+
+  _setupValidation() {
+    const titleInput = this.querySelector("#title");
+    const bodyInput = this.querySelector("#body");
+    const titleError = this.querySelector("#titleError");
+    const bodyError = this.querySelector("#bodyError");
+    const saveButton = this.querySelector("#saveButton");
+
+    // Helper function to validate the entire form
+    const validateForm = () => {
+      const isTitleValid = titleInput.value.trim().length >= 3;
+      const isBodyValid = bodyInput.value.trim().length >= 10;
+
+      saveButton.disabled = !(isTitleValid && isBodyValid);
+    };
+
+    // Validate title on input
+    titleInput.addEventListener("input", () => {
+      const value = titleInput.value.trim();
+      titleError.textContent = ""; // Reset pesan kesalahan
+
+      if (value.length < 3) {
+        titleError.textContent = "Title must be at least 3 characters";
+        titleInput.classList.add("invalid");
+      } else {
+        titleInput.classList.remove("invalid");
+      }
+
+      validateForm();
+    });
+
+    // Validate body on input
+    bodyInput.addEventListener("input", () => {
+      const value = bodyInput.value.trim();
+      bodyError.textContent = ""; // Reset pesan kesalahan
+
+      if (value.length < 10) {
+        bodyError.textContent = "Notes must be at least 10 characters";
+        bodyInput.classList.add("invalid");
+      } else {
+        bodyInput.classList.remove("invalid");
+      }
+
+      validateForm();
+    });
+  }
+
+  _onSubmit(event) {
+    event.preventDefault();
+    const titleInput = this.querySelector("#title");
+    const bodyInput = this.querySelector("#body");
+
+    const noteData = {
+      title: titleInput.value,
+      body: bodyInput.value,
+    };
+
+    this.dispatchEvent(
+      new CustomEvent("note-submit", {
+        detail: noteData,
+        bubbles: true,
+      }),
+    );
+
+    titleInput.value = "";
+    bodyInput.value = "";
+  }
 }
 
-customElements.define('note-input', NoteInput);
+customElements.define("note-input", NoteInput);
