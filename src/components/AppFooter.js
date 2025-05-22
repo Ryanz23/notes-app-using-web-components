@@ -1,9 +1,9 @@
 class AppFooter extends HTMLElement {
-    connectedCallback() {
-        this.render();
-    }
-    render() {
-        this.innerHTML = `
+  connectedCallback() {
+    this.render();
+  }
+  render() {
+    this.innerHTML = `
             <div class="bg-sky-900 text-white py-12 px-10 md:px-10 mt-20">
                 <div class="max-w-full mx-auto grid lg:grid-cols-2 md:max-w-5xl md:grid-cols-1 sm:max-w-2xl sm:grid-cols-1 gap-x-96">
                     <!--Logo dan Sosial Media-->
@@ -51,19 +51,19 @@ class AppFooter extends HTMLElement {
                         <h2 class="text-3xl font-bold">Resource</h2>
                         <div class="flex space-y-4">
                             <a href="https://www.javascript.com/" target="_blank" class="cursor-pointer">
-                                <img src="../../assets/html.png" class="h-16 w-16" alt="Logo HTML">
+                                <img src="/../assets/html.png" class="h-16 w-16" alt="Logo HTML">
                             </a>
                             <a href="https://www.javascript.com/" target="_blank" class="cursor-pointer">
-                                <img src="../../assets/js.png" class="h-16 w-16" alt="Logo JavaScript">
+                                <img src="/../assets/js.png" class="h-16 w-16" alt="Logo JavaScript">
                             </a>
                             <a href="https://www.tailwindcss.com/" target="_blank" class="cursor-pointer">
-                                <img src="../../assets/tailwind.png" class="h-16 w-16" alt="Logo Tailwind">
+                                <img src="/../assets/tailwind.png" class="h-16 w-16" alt="Logo Tailwind">
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
         `;
-    }
+  }
 }
-customElements.define('app-footer', AppFooter);
+customElements.define("app-footer", AppFooter);
