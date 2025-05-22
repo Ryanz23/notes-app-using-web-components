@@ -1,30 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notes App</title>
-    <script src="./dist/main.js" type="module"></script>
-    <link rel="icon" href="./assets/notebook.png" type="image/x-icon">
-</head>
-<body class="bg-sky-950">
+    <link rel="icon" type="image/png" href="./assets/notebook.png" />
+  </head>
+  <body class="bg-sky-950">
     <app-bar></app-bar>
-    
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 sm:max-w-2xl md:max-w-5xl lg:px-8 py-2">
-        <section class="grid grid-cols-2 gap-x-4 my-6">
-            <user-info></user-info>
-            <note-input></note-input>
-        </section>
-        
-        <section class="bg-sky-900 rounded-lg my-4 p-2">
-            <h2 class="text-white text-2xl font-bold py-4 md:text-[20px] sm:text-[18px] text-center">Saved Notes</h2>
-            <note-list></note-list>
-        </section>
+
+    <main
+      class="max-w-7xl mx-auto px-4 sm:px-6 sm:max-w-2xl md:max-w-5xl lg:px-8 py-2"
+    >
+      <section class="grid grid-cols-2 gap-x-4 my-6">
+        <user-info></user-info>
+        <note-input></note-input>
+      </section>
+
+      <app-loader id="loader"></app-loader>
+
+      <section class="bg-sky-900 rounded-lg my-4 p-2">
+        <h2
+          class="text-white text-2xl font-bold py-4 md:text-[20px] sm:text-[18px] text-center"
+        >
+          Saved Notes
+        </h2>
+        <note-list></note-list>
+      </section>
     </main>
 
     <app-footer></app-footer>
-
-
-    <script src="./src/app.js" type="module"></script>
-</body>
+  </body>
 </html>
