@@ -1,22 +1,24 @@
 {
   "name": "notes-app",
+  "type": "module",
   "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "html-webpack-plugin": "^5.6.3",
+    "prettier": "3.5.3"
   },
   "scripts": {
-    "build": "npx tailwindcss -i ./src/input.css -o ./src/output.css && webpack --mode production",
-    "start-dev": "webpack serve --mode development",
-    "watch": "webpack --mode development --watch"
+    "build": "npx tailwindcss -i ./src/input.css -o ./src/output.css && webpack --mode production --config webpack.config.js",
+    "start-dev": "webpack serve --mode development --config webpack.config.js"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.0.13",
+    "@tailwindcss/cli": "^4.1.7",
     "css-loader": "^7.1.2",
     "style-loader": "^4.0.0",
-    "tailwindcss": "^4.0.14",
+    "tailwindcss": "^4.1.7",
     "webpack": "^5.99.5",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.1"
