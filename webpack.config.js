@@ -1,32 +1,45 @@
-const path = require('path')
-const webpack = require('webpack')
+import path from "path";
+import { fileURLToPath } from "url";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
-module.exports = {
-  mode: 'development',
-  entry: './src/app.js',
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
+  entry: "./src/app.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
-  },
-  devServer: {
-    static: {
-      directory: path.resolve(__dirname, '/'),
-    },
-    port: 3000,
-    open: true,
-    hot: true,
-    compress: true,
-    liveReload: true,
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    clean: true,
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
       },
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./index.html",
+      filename: "index.html",
+    }),
   ],
-}
+  resolve: {
+    extensions: [".js"],
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "/"),
+    },
+    compress: true,
+    port: 3000,
+    open: true,
+  },
+  mode: "development",
+};
